@@ -9,6 +9,7 @@ namespace FPlus.Program
         {
             System.Console.WriteLine("Welcome to FPlus.");
             System.Console.WriteLine("We hate the Plus Rule in Triple Triad, so we're here to help.");
+            Deck deck = new Deck();
             Board board = new Board();
             while (true)
             {

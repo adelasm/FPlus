@@ -12,6 +12,7 @@ namespace FPlus.Program
             south = s;
             values = new int?[]{n,w,e,s};
         }
+        string name {get; set;}
         public int? north { get; }
         public int? west { get; }
         public int? east { get; }
