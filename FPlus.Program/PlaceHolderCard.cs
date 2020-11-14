@@ -7,20 +7,20 @@ namespace FPlus.Program
 
         public PlaceHolderCard()
         {
-            north = 0;
-            west = 0;
-            east = 0;
-            south = 0;
+            north = null;
+            west = null;
+            east = null;
+            south = null;
         }
 
-        public int north {get;}
+        public int? north {get;}
 
-        public int west {get;}
+        public int? west {get;}
 
-        public int east {get;}
+        public int? east {get;}
 
-        public int south {get;}
+        public int? south {get;}
 
-        public int[] values => throw new System.NotImplementedException();
+        public int?[] values => throw new System.NotImplementedException();
     }
 }

@@ -1,7 +1,7 @@
 
 namespace FPlus.Program
 {
-    enum Direction
+    public enum Direction
     {
         North,
         West,

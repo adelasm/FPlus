@@ -19,6 +19,16 @@ namespace FPlus.Program
             board[x][y].card = card;
         }
 
+        public ISquare GetSquare(int x, int y)
+        {
+            return board[x][y];
+        }
+
+        public ICard GetCard(int x, int y)
+        {
+            return board[x][y].card;
+        }
+
         public ISquare[][] BoardState()
         {
             return board;

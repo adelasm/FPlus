@@ -1,6 +1,6 @@
 namespace FPlus.Program
 {
-    interface ISquare
+    public interface ISquare
     {
         ICard card {get; set;}
         (int,int)? position {get; set;}
