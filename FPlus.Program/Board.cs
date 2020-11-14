@@ -9,9 +9,10 @@ namespace FPlus.Program
         public Board()
         {
             board = new ISquare[3][];
-            board[0] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Top row of squares
-            board[1] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Middle row of squares
-            board[2] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Bottom row of squares
+
+            board[0] = new ISquare[3] { new Square((0,0)), new Square((0,1)), new Square((0,2)) }; // Top row of squares
+            board[1] = new ISquare[3] { new Square((1,0)), new Square((1,1)), new Square((1,2)) }; // Middle row of squares
+            board[2] = new ISquare[3] { new Square((2,0)), new Square((2,1)), new Square((2,2)) }; // Bottom row of squares
         }
 
         public void Insert(ICard card,int x,int y)
