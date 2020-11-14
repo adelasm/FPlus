@@ -8,6 +8,6 @@ namespace FPlus.Program
             position = null;
         }
         public ICard card { get; set; }
-        public int? position { get; set; }
+        public (int,int)? position { get; set; }
     }
 }
