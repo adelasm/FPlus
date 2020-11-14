@@ -2,7 +2,7 @@ using System;
 using Extensions;
 namespace FPlus.Program
 {
-    class Board
+    public class Board
     {
         private ISquare[][] board;
 

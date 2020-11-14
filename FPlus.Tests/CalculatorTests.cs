@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using FPlus.Program;
 
 namespace FPlus.Tests
 {
@@ -8,7 +9,7 @@ namespace FPlus.Tests
         [Fact]
         public void Test1()
         {
-            
+            Board board = new Board();
         }
     }
 }

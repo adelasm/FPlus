@@ -4,8 +4,12 @@ namespace FPlus.Program
     enum Direction
     {
         North,
-        East,
         West,
-        South
+        East,
+        South,
+        NorthWest,
+        NorthEast,
+        SouthWest,
+        SouthEast
     }
 }
