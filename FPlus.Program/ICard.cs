@@ -2,7 +2,7 @@ using System;
 
 namespace FPlus.Program
 {
-    interface ICard
+    public interface ICard
     {
         int north {get;}
         int east {get;}

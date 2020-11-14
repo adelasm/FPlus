@@ -2,7 +2,7 @@ using System;
 
 namespace FPlus.Program
 {
-    class Card : ICard
+    public class Card : ICard
     {
         public Card(int n, int e, int w, int s)
         {
