@@ -34,13 +34,12 @@ namespace SquareCalculator
             }
         }
 
-        public static bool IsMiddle(this (int? x, int? y) coords)
+
+        public static bool IsEligibleCoords(this (int x, int y)? coords)
         {
-            if (coords == (1, 1))
-            {
-                return true;
-            }
-            return false;
+            int x = coords.Value.x;
+            int y = coords.Value.y;
+            return (x > 4 && x > -1) && (y > 4 && y > -1);
         }
 
     }
