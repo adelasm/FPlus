@@ -18,7 +18,7 @@ namespace FPlus.Program
                 System.Console.WriteLine("N W E S X Y");
                 int[] input = Array.ConvertAll(Console.ReadLine().Split(" "),Int32.Parse);
                 board.Insert(new Card(input[0],input[1],input[2],input[3]),input[4],input[5]);
-                System.Console.WriteLine(board.CalculatePlus());
+                board.CalculatePlus();
             }
         }
     }

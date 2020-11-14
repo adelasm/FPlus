@@ -35,26 +35,52 @@ namespace FPlus.Program
             switch (position)
             {
                 case Position.NorthWest:
-                    return GetCard(0,0);
+                    return GetCard(0, 0);
                 case Position.North:
-                    return GetCard(0,1);
+                    return GetCard(0, 1);
                 case Position.NorthEast:
-                    return GetCard(0,2);
-                case Position.East:
-                    return GetCard(1,0);
-                case Position.Middle:
-                    return GetCard(1,1);
+                    return GetCard(0, 2);
                 case Position.West:
-                    return GetCard(1,2);
+                    return GetCard(1, 0);
+                case Position.Middle:
+                    return GetCard(1, 1);
+                case Position.East:
+                    return GetCard(1, 2);
                 case Position.SouthWest:
-                    return GetCard(2,0);
+                    return GetCard(2, 0);
                 case Position.South:
-                    return GetCard(2,1);
+                    return GetCard(2, 1);
                 case Position.SouthEast:
-                    return GetCard(2,2);
-                default:
-                    return new PlaceHolderCard();
+                    return GetCard(2, 2);
             }
+            return new PlaceHolderCard();
+        }
+
+        public int?[] GetNeighborValues(Position position)
+        {
+            switch (position)
+            {
+                // Formatted to NWES
+                case Position.NorthWest:
+                    return new int?[4] { null, null, GetCard(Position.North).west, GetCard(Position.West).north, };
+                case Position.North:
+                    return new int?[4] { null, GetCard(Position.NorthWest).east, GetCard(Position.NorthEast).west, GetCard(Position.Middle).north };
+                case Position.NorthEast:
+                    return new int?[4] { null, GetCard(Position.North).east, null, GetCard(Position.East).north };
+                case Position.East:
+                    return new int?[4] { GetCard(Position.NorthEast).south, GetCard(Position.Middle).east, null, GetCard(Position.SouthEast).north };
+                case Position.Middle:
+                    return new int?[4] { GetCard(Position.North).south, GetCard(Position.West).east, GetCard(Position.East).west, GetCard(Position.South).north };
+                case Position.West:
+                    return new int?[4] { GetCard(Position.NorthWest).south, null, GetCard(Position.Middle).west, GetCard(Position.SouthWest).north };
+                case Position.SouthWest:
+                    return new int?[4] { GetCard(Position.West).south, null, GetCard(Position.South).west, null };
+                case Position.South:
+                    return new int?[4] { GetCard(Position.Middle).south, GetCard(Position.SouthWest).east, GetCard(Position.SouthEast).west, null };
+                case Position.SouthEast:
+                    return new int?[4] { GetCard(Position.East).south, GetCard(Position.South).east, null, null };
+            }
+            return new int?[] { null };
         }
 
         public ISquare[][] BoardState()
@@ -120,31 +146,22 @@ namespace FPlus.Program
 
         public string FormatRow(ICard card, Direction direction)
         {
-            if (card.IsPlaceHolder())
-            {
-                switch (direction)
-                {
-                    case Direction.North:
-                        return $"| {"",3}   {"|",5}";
-                    case Direction.East:
-                        return $"|    ";
-                    case Direction.West:
-                        return $"{"",3}   {"|",2}";
-                    case Direction.South:
-                        return $"| {"",3}   {"|",5}";
-                    default:
-                        return "Error";
-                }
-            }
             switch (direction)
             {
                 case Direction.North:
+                    if (card.north.IsNull()) return $"| {"",3}   {"|",5}";
+
                     return $"| {"",3}[{card.north}]{"|",5}";
                 case Direction.East:
+                    if (card.east.IsNull()) return $"|    ";
+
                     return $"| [{card.east}]";
                 case Direction.West:
+                    if (card.west.IsNull())  return $"{"",3}   {"|",2}";
+                    
                     return $"{"",3}[{card.west}]{"|",2}";
                 case Direction.South:
+                    if (card.south.IsNull()) return $"| {"",3}   {"|",5}";
                     return $"| {"",3}[{card.south}]{"|",5}";
                 default:
                     return "Error";

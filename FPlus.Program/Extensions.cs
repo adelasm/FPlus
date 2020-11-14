@@ -4,13 +4,18 @@ namespace Extensions
 {
     public static class Extensions
     {
-        public static bool IsPlaceHolder(this ICard card)
+        public static bool IsNotPlaceHolder(this ICard card)
         {
-            if (card.north == null & card.east == null & card.west == null & card.south == null)
-            {
-                return true;
-            }
-            return false;
+            return card.north.IsNotNull() & card.east.IsNotNull() & card.west.IsNotNull() & card.south.IsNotNull();
+        }
+
+        public static bool IsNull(this int? i)
+        {
+            return i == null;
+        }
+        public static bool IsNotNull(this int? i)
+        {
+            return i != null;
         }
     }
 }

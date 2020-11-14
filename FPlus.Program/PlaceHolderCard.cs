@@ -11,16 +11,17 @@ namespace FPlus.Program
             west = null;
             east = null;
             south = null;
+            values = new int?[] {north,west,east,south};
         }
 
-        public int? north {get;}
+        public int? north {get; set;}
 
-        public int? west {get;}
+        public int? west {get; set;}
 
-        public int? east {get;}
+        public int? east {get; set;}
 
-        public int? south {get;}
+        public int? south {get; set;}
 
-        public int?[] values => throw new System.NotImplementedException();
+        public int?[] values {get;}
     }
 }
