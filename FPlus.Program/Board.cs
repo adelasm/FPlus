@@ -4,22 +4,22 @@ namespace FPlus.Program
 {
     class Board
     {
-        private ICard[][] board;
+        private ISquare[][] board;
 
-        public Board(ICard[] cards)
+        public Board()
         {
-            board = new ICard[3][];
-            board[0] = new ICard[3] { cards[0], cards[1], cards[2] };
-            board[1] = new ICard[3] { cards[3], cards[4], cards[5] };
-            board[2] = new ICard[3] { cards[6], cards[7], cards[8] };
+            board = new ISquare[3][];
+            board[0] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Top row of squares
+            board[1] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Middle row of squares
+            board[2] = new ISquare[3] { new PlaceHolderSquare(), new PlaceHolderSquare(), new PlaceHolderSquare() }; // Bottom row of squares
         }
 
         public void Insert(ICard card,int x,int y)
         {
-            board[x][y] = card;
+            board[x][y].card = card;
         }
 
-        public ICard[][] BoardState()
+        public ISquare[][] BoardState()
         {
             return board;
         }
@@ -28,13 +28,13 @@ namespace FPlus.Program
         public void PrintBoard()
         {
             System.Console.WriteLine("--------------------------------------");
-            foreach (ICard[] row in board)
+            foreach (ISquare[] row in board)
             {
                 PrintRow(row);
             }
         }
 
-        public void PrintRow(ICard[] row)
+        public void PrintRow(ISquare[] row)
         {
             string[][] rows = PopulateSquareRows(row);
 
@@ -55,13 +55,11 @@ namespace FPlus.Program
             System.Console.Write(rows[3][0]);
             System.Console.Write(rows[3][1]);
             System.Console.WriteLine(rows[3][2]);
-
-
             
             System.Console.WriteLine("--------------------------------------");
         }
 
-        public string[][] PopulateSquareRows(ICard[] row)
+        public string[][] PopulateSquareRows(ISquare[] row)
         {
             string[][] rows = new string[4][];
             rows[0] = PopulateSquareRow(row, Direction.North);
@@ -71,12 +69,12 @@ namespace FPlus.Program
             return rows;
         }
 
-        public string[] PopulateSquareRow(ICard[] cards, Direction direction)
+        public string[] PopulateSquareRow(ISquare[] squares, Direction direction)
         {
             return new string[] {
-                FormatRow(cards[0],direction),
-                FormatRow(cards[1],direction),
-                FormatRow(cards[2],direction),
+                FormatRow(squares[0].card,direction),
+                FormatRow(squares[1].card,direction),
+                FormatRow(squares[2].card,direction),
             };
         }
 

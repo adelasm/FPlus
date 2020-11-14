@@ -3,7 +3,7 @@ using Xunit;
 
 namespace FPlus.Tests
 {
-    public class UnitTest1
+    public class CalculatorTests
     {
         [Fact]
         public void Test1()
