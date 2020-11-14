@@ -34,13 +34,5 @@ namespace SquareCalculator
             }
         }
 
-
-        public static bool IsEligibleCoords(this (int x, int y)? coords)
-        {
-            int x = coords.Value.x;
-            int y = coords.Value.y;
-            return (x > 4 && x > -1) && (y > 4 && y > -1);
-        }
-
     }
 }

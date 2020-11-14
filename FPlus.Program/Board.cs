@@ -5,6 +5,7 @@ namespace FPlus.Program
     public class Board
     {
         private ISquare[][] board;
+        public Deck deck {get; set;}
 
         public Board()
         {
@@ -87,9 +88,6 @@ namespace FPlus.Program
         {
             return board;
         }
-
-
-
 
         public void PrintBoard()
         {

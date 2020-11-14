@@ -15,7 +15,7 @@ namespace WriterExtensions
         public static void ReadFromJson(this Deck deck)
         {
             string deckFile = File.ReadAllText("Deck/Deck.json");
-            dynamic deckList = JsonSerializer.Deserialize<Deck>(deckFile);
+            Deck deckList = JsonSerializer.Deserialize<Deck>(deckFile);
             deck.cards = deckList.cards;
         }
     }
