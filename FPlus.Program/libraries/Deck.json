@@ -1,1 +1,69 @@
-{"cards":[{"north":6,"west":4,"east":2,"south":1,"values":[6,4,2,1],"name":"Ixal"},{"north":5,"west":4,"east":5,"south":6,"values":[5,4,5,6],"name":"Lizbeth"},{"north":3,"west":3,"east":4,"south":3,"values":[3,3,4,3],"name":"Bomb"},{"north":4,"west":3,"east":3,"south":3,"values":[4,3,3,3],"name":"Sabotender"},{"north":2,"west":5,"east":5,"south":2,"values":[2,5,5,2],"name":"Coeurl"}]}
+{
+    "cards": [
+        {
+            "north": 6,
+            "west": 4,
+            "east": 2,
+            "south": 1,
+            "values": [
+                6,
+                4,
+                2,
+                1
+            ],
+            "name": "ixal"
+        },
+        {
+            "north": 5,
+            "west": 4,
+            "east": 5,
+            "south": 6,
+            "values": [
+                5,
+                4,
+                5,
+                6
+            ],
+            "name": "lizbeth"
+        },
+        {
+            "north": 3,
+            "west": 3,
+            "east": 4,
+            "south": 3,
+            "values": [
+                3,
+                3,
+                4,
+                3
+            ],
+            "name": "bomb"
+        },
+        {
+            "north": 4,
+            "west": 3,
+            "east": 3,
+            "south": 3,
+            "values": [
+                4,
+                3,
+                3,
+                3
+            ],
+            "name": "sabotender"
+        },
+        {
+            "north": 2,
+            "west": 5,
+            "east": 5,
+            "south": 2,
+            "values": [
+                2,
+                5,
+                5,
+                2
+            ],
+            "name": "coeurl"
+        }
+    ]
+}
