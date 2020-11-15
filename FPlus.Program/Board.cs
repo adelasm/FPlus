@@ -127,8 +127,8 @@ namespace FPlus.Program
         {
             string[][] rows = new string[4][];
             rows[0] = PopulateSquareRow(row, Direction.North);
-            rows[1] = PopulateSquareRow(row, Direction.East);
-            rows[2] = PopulateSquareRow(row, Direction.West);
+            rows[1] = PopulateSquareRow(row, Direction.West);
+            rows[2] = PopulateSquareRow(row, Direction.East);
             rows[3] = PopulateSquareRow(row, Direction.South);
             return rows;
         }
@@ -151,13 +151,13 @@ namespace FPlus.Program
 
                     return $"| {"",3}[{card.north}]{"|",5}";
                 case Direction.East:
-                    if (card.east.IsNull()) return $"|    ";
-
-                    return $"| [{card.east}]";
-                case Direction.West:
-                    if (card.west.IsNull())  return $"{"",3}   {"|",2}";
+                    if (card.east.IsNull())  return $"{"",3}   {"|",2}";
                     
-                    return $"{"",3}[{card.west}]{"|",2}";
+                    return $"{"",3}[{card.east}]{"|",2}";
+                case Direction.West:
+                    if (card.west.IsNull()) return $"|    ";
+
+                    return $"| [{card.west}]";
                 case Direction.South:
                     if (card.south.IsNull()) return $"| {"",3}   {"|",5}";
                     return $"| {"",3}[{card.south}]{"|",5}";

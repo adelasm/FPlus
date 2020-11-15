@@ -36,11 +36,13 @@ namespace CardCalculator
             int? max = neighborValues.Max() + 1;
             PlaceHolderCard card = new PlaceHolderCard();
             card.north = max - neighborValues[0];
-            card.east = max - neighborValues[1];
-            card.west = max - neighborValues[2];
+            card.west = max - neighborValues[1];
+            card.east = max - neighborValues[2];
             card.south = max - neighborValues[3];
             return card;
         }
+
+        
 
         public static bool IsMiddle(this Position position)
         {
