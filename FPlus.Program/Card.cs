@@ -15,11 +15,11 @@ namespace FPlus.Program
             values = new int?[]{n,w,e,s};
             name = na;
         }
-        public int? north { get; }
-        public int? west { get; }
-        public int? east { get; }
-        public int? south { get; }
-        public int?[] values { get; }
+        public int? north { get; set; }
+        public int? west { get; set;}
+        public int? east { get; set; }
+        public int? south { get; set; }
+        public int?[] values { get; set; }
         public string name {get; set;}
     }
 }

@@ -4,10 +4,10 @@ namespace FPlus.Program
 {
     public interface ICard
     {
-        int? north {get;}
-        int? west {get;}
-        int? east {get;}
-        int? south {get;}
-        int?[] values {get;}
+        int? north {get; set;}
+        int? west {get; set;}
+        int? east {get; set;}
+        int? south {get; set;}
+        int?[] values {get; set;}
     }
 }
