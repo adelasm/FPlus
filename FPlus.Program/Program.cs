@@ -27,16 +27,20 @@ namespace FPlus.Program
             }
             Board board = new Board();
             board.deck = deck;
-            while (true)
-            {
-                board.PrintBoard();
-                System.Console.WriteLine("Play a card.");
-                System.Console.WriteLine("Format (with spaces):");
-                System.Console.WriteLine("CardName Position");
-                string[] input = Console.ReadLine().Split(" ");
-                board.Insert(board.deck.ClosestCard(input[0]), input[1].GetPosition());
-                board.CalculatePlus();
-            }
+            Library lib = new Library();
+            System.Console.WriteLine("hi");
+            lib.PopulateLibrary();
+            lib.WriteToJson();
+            // while (true)
+            // {
+            //     board.PrintBoard();
+            //     System.Console.WriteLine("Play a card.");
+            //     System.Console.WriteLine("Format (with spaces):");
+            //     System.Console.WriteLine("CardName Position");
+            //     string[] input = Console.ReadLine().Split(" ");
+            //     board.Insert(board.deck.ClosestCard(input[0]), input[1].GetPosition());
+            //     board.CalculatePlus();
+            // }
         }
     }
 }

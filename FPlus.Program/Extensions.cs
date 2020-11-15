@@ -1,11 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FPlus.Program;
+using HtmlAgilityPack;
 
 namespace Extensions
 {
     public static class Extensions
     {
+        public static HtmlNodeCollection FindChild(this HtmlNodeCollection parent, string attribute, string value)
+        {
+            for (int i = 0; i < parent.Count; i++)
+            {
+                if (parent[i].Attributes[attribute].Value == value && parent[i].IsHtmlElement())
+                {
+                    System.Console.WriteLine(parent[i].Name);
+                    return parent[i].ChildNodes;
+
+                }
+            }
+            throw new NotImplementedException("pain");
+        }
+
+        public static bool IsNumeric(this string text) => double.TryParse(text, out _);
+
+        public static bool IsHtmlElement(this HtmlNode node)
+        {
+            return node.NodeType == HtmlNodeType.Element;
+        }
         public static bool IsNotPlaceHolder(this ICard card)
         {
             return card.north.IsNotNull() & card.east.IsNotNull() & card.west.IsNotNull() & card.south.IsNotNull();
