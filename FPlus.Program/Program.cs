@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text.Json;
 using CardCalculator;
 using WriterExtensions;
 using Extensions;
@@ -14,6 +12,13 @@ namespace FPlus.Program
             System.Console.WriteLine("Welcome to FPlus.");
             System.Console.WriteLine("We hate the Plus Rule in Triple Triad, so we're here to help.");
             Deck deck = new Deck();
+            deck.fileName = "Deck";
+            System.Console.WriteLine($"Enter deck file name (default is {deck.fileName} if empty)");
+            string deckName = Console.ReadLine();
+            if (deckName != "")
+            {
+                deck.fileName = deckName;
+            }
             deck.ReadFromJson();
             System.Console.WriteLine("The deck:");
             foreach (var card in deck.cards)

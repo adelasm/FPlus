@@ -8,6 +8,9 @@
   <Content Include="Deck\**"> 
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
   </Content> 
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="trienet" Version="1.0.3.26316" />
   </ItemGroup> 
 
 </Project>

@@ -6,17 +6,17 @@ namespace WriterExtensions
 {
     public static class WriterExtensions
     {
-        public static void WriteToJson(this Deck deck)
+        public static void WriteToJson(this ILibrary library)
         {
-            string deckString = JsonSerializer.Serialize(deck);
-            File.WriteAllText("Deck/Deck.json",deckString);
+            string libraryString = JsonSerializer.Serialize(library);
+            File.WriteAllText($"libraries/{library.fileName}.json", libraryString);
         }
 
-        public static void ReadFromJson(this Deck deck)
+        public static void ReadFromJson(this ILibrary library)
         {
-            string deckFile = File.ReadAllText("Deck/Deck.json");
-            Deck deckList = JsonSerializer.Deserialize<Deck>(deckFile);
-            deck.cards = deckList.cards;
+            string libraryFile = File.ReadAllText($"libraries/{library.fileName}.json");
+            ILibrary libraryList = JsonSerializer.Deserialize<Deck>(libraryFile);
+            library.cards = libraryList.cards;
         }
     }
 }
