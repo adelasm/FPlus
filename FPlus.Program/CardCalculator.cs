@@ -42,29 +42,6 @@ namespace CardCalculator
             return card;
         }
 
-        //Very clunky, wrote while I was tired.
-        public static string CompareToDeck(this ICard card, Deck deck)
-        {
-            int?[] closest = new int?[] { deck.cards[0].north, deck.cards[0].west, deck.cards[0].east, deck.cards[0].south };
-
-            for (int i = 0; i < card.values.Length; i++)
-            {
-                for (int j = 1; j < deck.cards.Length; j++)
-                {
-                    if ((deck.cards[j].values[i]-card.values[i]) < closest[i])
-                    {
-                        closest[i] = deck.cards[j].values[i];
-                    }
-                }
-            }
-            int most = (int)(from i in closest
-            group i by i into grp
-            orderby grp.Count() descending
-            select grp.Key).First();
-
-            return deck.cards[most].name;
-        }
-
         public static bool IsMiddle(this Position position)
         {
             return position == Position.Middle;
