@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using CardCalculator;
 using WriterExtensions;
+using Extensions;
 
 namespace FPlus.Program
 {
@@ -20,14 +21,15 @@ namespace FPlus.Program
                 System.Console.WriteLine($"{card.name} ({card.north},{card.west},{card.east},{card.south})");
             }
             Board board = new Board();
+            board.deck = deck;
             while (true)
             {
                 board.PrintBoard();
                 System.Console.WriteLine("Play a card.");
                 System.Console.WriteLine("Format (with spaces):");
-                System.Console.WriteLine("N W E S X Y");
-                int[] input = Array.ConvertAll(Console.ReadLine().Split(" "), Int32.Parse);
-                board.Insert(new Card(input[0], input[1], input[2], input[3]), input[4], input[5]);
+                System.Console.WriteLine("CardName Position");
+                string[] input = Console.ReadLine().Split(" ");
+                board.Insert(board.deck.ClosestCard(input[0]), input[1].GetPosition());
                 board.CalculatePlus();
             }
         }

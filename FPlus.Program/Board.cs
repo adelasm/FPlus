@@ -21,6 +21,40 @@ namespace FPlus.Program
             board[x][y].card = card;
         }
 
+        public void Insert(ICard card, Position position)
+        {
+            switch (position)
+            {
+                case Position.NorthWest:
+                    Insert(card,0, 0);
+                    break;
+                case Position.North:
+                    Insert(card,0, 1);
+                    break;
+                case Position.NorthEast:
+                    Insert(card,0, 2);
+                    break;
+                case Position.West:
+                    Insert(card,1, 0);
+                    break;
+                case Position.Middle:
+                    Insert(card,1, 1);
+                    break;
+                case Position.East:
+                    Insert(card,1, 2);
+                    break;
+                case Position.SouthWest:
+                    Insert(card,2, 0);
+                    break;
+                case Position.South:
+                    Insert(card,2, 1);
+                    break;
+                case Position.SouthEast:
+                    Insert(card,2, 2);
+                    break;
+            }
+        }
+
         public ISquare GetSquare(int x, int y)
         {
             return board[x][y];
