@@ -22,6 +22,6 @@ namespace FPlus.Program
 
         public int? south {get; set;}
 
-        public int?[] values {get;}
+        public int?[] values {get; set;}
     }
 }

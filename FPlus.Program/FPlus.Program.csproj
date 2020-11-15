@@ -4,5 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup> 
+  <Content Include="libraries\**"> 
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
+  </Content> 
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="trienet" Version="1.0.3.26316" />
+  </ItemGroup> 
 
 </Project>

@@ -5,6 +5,7 @@ namespace FPlus.Program
     public class Board
     {
         private ISquare[][] board;
+        public Deck deck {get; set;}
 
         public Board()
         {
@@ -18,6 +19,40 @@ namespace FPlus.Program
         public void Insert(ICard card, int x, int y)
         {
             board[x][y].card = card;
+        }
+
+        public void Insert(ICard card, Position position)
+        {
+            switch (position)
+            {
+                case Position.NorthWest:
+                    Insert(card,0, 0);
+                    break;
+                case Position.North:
+                    Insert(card,0, 1);
+                    break;
+                case Position.NorthEast:
+                    Insert(card,0, 2);
+                    break;
+                case Position.West:
+                    Insert(card,1, 0);
+                    break;
+                case Position.Middle:
+                    Insert(card,1, 1);
+                    break;
+                case Position.East:
+                    Insert(card,1, 2);
+                    break;
+                case Position.SouthWest:
+                    Insert(card,2, 0);
+                    break;
+                case Position.South:
+                    Insert(card,2, 1);
+                    break;
+                case Position.SouthEast:
+                    Insert(card,2, 2);
+                    break;
+            }
         }
 
         public ISquare GetSquare(int x, int y)
@@ -88,9 +123,6 @@ namespace FPlus.Program
             return board;
         }
 
-
-
-
         public void PrintBoard()
         {
             System.Console.WriteLine("--------------------------------------");
@@ -129,8 +161,8 @@ namespace FPlus.Program
         {
             string[][] rows = new string[4][];
             rows[0] = PopulateSquareRow(row, Direction.North);
-            rows[1] = PopulateSquareRow(row, Direction.East);
-            rows[2] = PopulateSquareRow(row, Direction.West);
+            rows[1] = PopulateSquareRow(row, Direction.West);
+            rows[2] = PopulateSquareRow(row, Direction.East);
             rows[3] = PopulateSquareRow(row, Direction.South);
             return rows;
         }
@@ -153,13 +185,13 @@ namespace FPlus.Program
 
                     return $"| {"",3}[{card.north}]{"|",5}";
                 case Direction.East:
-                    if (card.east.IsNull()) return $"|    ";
-
-                    return $"| [{card.east}]";
-                case Direction.West:
-                    if (card.west.IsNull())  return $"{"",3}   {"|",2}";
+                    if (card.east.IsNull())  return $"{"",3}   {"|",2}";
                     
-                    return $"{"",3}[{card.west}]{"|",2}";
+                    return $"{"",3}[{card.east}]{"|",2}";
+                case Direction.West:
+                    if (card.west.IsNull()) return $"|    ";
+
+                    return $"| [{card.west}]";
                 case Direction.South:
                     if (card.south.IsNull()) return $"| {"",3}   {"|",5}";
                     return $"| {"",3}[{card.south}]{"|",5}";
