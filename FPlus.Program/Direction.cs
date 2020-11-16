@@ -6,10 +6,6 @@ namespace FPlus.Program
         North,
         West,
         East,
-        South,
-        NorthWest,
-        NorthEast,
-        SouthWest,
-        SouthEast
+        South
     }
 }

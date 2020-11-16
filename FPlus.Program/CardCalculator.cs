@@ -41,23 +41,5 @@ namespace CardCalculator
             card.south = max - neighborValues[3];
             return card;
         }
-
-        
-
-        public static bool IsMiddle(this Position position)
-        {
-            return position == Position.Middle;
-        }
-        public static bool IsCorner(this Position position)
-        {
-            return position == Position.NorthWest || position == Position.NorthEast || position == Position.SouthWest || position == Position.SouthEast;
-        }
-
-        public static bool IsSide(this Position position)
-        {
-            return position == Position.North || position == Position.West || position == Position.East || position == Position.South;
-        }
-
-
     }
 }
