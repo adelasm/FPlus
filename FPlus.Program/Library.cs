@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Extensions;
 using Gma.DataStructures.StringSearch;
@@ -18,7 +19,7 @@ namespace FPlus.Program
             var htmlDoc = web.Load(@"https://ffxiv.consolegameswiki.com/wiki/Triple_Triad_Cards");
 
             var htmlBody = htmlDoc.GetElementbyId("mw-content-text").ChildNodes.ElementAt(2).ChildNodes;
-            cards = new Card[htmlBody.Count];
+            List<Card> cardList = new List<Card>();
             int?[] moldableCardInfo = new int?[] { null, null, null, null };
             for (int i = 0; i < htmlBody.Count; i++)
             {
@@ -63,12 +64,12 @@ namespace FPlus.Program
                             }
                             System.Console.WriteLine($"Setting {test[j].InnerHtml} to west on card {i} with {test[1].ChildNodes[0].InnerHtml.Split(" Card")[0]} name");
                             moldableCardInfo[1] = Int32.Parse(test[j].InnerHtml);
-                            cards[i] = new Card(moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3],test[6].InnerHtml);
+                            cardList.Add(new Card(moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3],test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower()));
                             break;
                     }
                 }
             }
-
+            cards = cardList.ToArray();
         }
 
         public Card ClosestCard(string input)
