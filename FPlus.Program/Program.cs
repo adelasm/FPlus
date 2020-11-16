@@ -25,11 +25,12 @@ namespace FPlus.Program
             {
                 System.Console.WriteLine($"{card.name} ({card.north},{card.west},{card.east},{card.south})");
             }
-            Board board = new Board();
-            board.deck = deck;
             Library lib = new Library();
             lib.PopulateLibrary();
             lib.WriteToJson();
+            Board board = new Board();
+            board.deck = deck;
+            board.library = lib;
             while (true)
             {
                 board.PrintBoard();
@@ -37,7 +38,7 @@ namespace FPlus.Program
                 System.Console.WriteLine("Format (with spaces):");
                 System.Console.WriteLine("CardName Position");
                 string[] input = Console.ReadLine().Split(" ");
-                board.Insert(board.deck.ClosestCard(input[0]), input[1].GetPosition());
+                board.Insert(board.library.ClosestCard(input[0]), input[1].GetPosition());
                 board.CalculatePlus();
             }
         }

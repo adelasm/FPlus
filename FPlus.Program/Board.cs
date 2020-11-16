@@ -6,6 +6,7 @@ namespace FPlus.Program
     {
         private ISquare[][] board;
         public Deck deck {get; set;}
+        public ILibrary library {get; set;}
 
         public Board()
         {
