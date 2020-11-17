@@ -26,11 +26,12 @@ namespace CardCalculator
                         continue;
                     }
                     ICard neighborCard = board.GetNeighborValues(pos);
-                    System.Console.WriteLine(pos);
-                    System.Console.WriteLine("Inserting");
                     ICard card = neighborCard.MatchingFromLibrary(board.deck);
                     board.Insert(card, pos);
-                    names.Add(card.name);
+                    if (card.name != null)
+                    {
+                        names.Add(pos + " " + card.name);
+                    }
                 }
             }
             return names;
@@ -38,7 +39,7 @@ namespace CardCalculator
 
         public static ICard FindPlusables(this ICard card)
         {
-            int?[] values = new int?[4] {card.north,card.west,card.east,card.south};
+            int?[] values = new int?[4] { card.north, card.west, card.east, card.south };
             int? max = values.Max() + 1;
             card.north = max - card.north;
             card.west = max - card.west;
@@ -50,7 +51,7 @@ namespace CardCalculator
 
         public static ICard FindEquals(this ICard card)
         {
-            int?[] values = new int?[4] {card.north,card.west,card.east,card.south};
+            int?[] values = new int?[4] { card.north, card.west, card.east, card.south };
             int? max = values.Max() + 1;
             card.north = max - card.north;
             card.west = max - card.west;
@@ -97,8 +98,6 @@ namespace CardCalculator
                 }
                 if (match.north == card.north && match.west == card.west && match.east == card.east && match.south == card.south)
                 {
-                    System.Console.WriteLine("help");
-                    System.Console.WriteLine(libCard.name);
                     match = new Card(libCard.north.Value, libCard.west.Value, libCard.east.Value, libCard.south.Value, libCard.name);
                     match.values = libCard.values;
                     if (card.north.IsNull())
