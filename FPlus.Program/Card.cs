@@ -82,5 +82,10 @@ namespace FPlus.Program
             }
         }
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{name} ({north},{west},{east},{south})";
+        }
     }
 }
