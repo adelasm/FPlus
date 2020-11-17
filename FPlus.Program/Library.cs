@@ -12,7 +12,7 @@ namespace FPlus.Program
         public Card[] cards { get; set; }
         public string fileName { get; set; }
 
-        public void PopulateLibrary()
+        public Library()
         {
             fileName = "Library";
             var web = new HtmlWeb();
@@ -59,13 +59,13 @@ namespace FPlus.Program
                             if (!int.TryParse(test[j].InnerHtml, out _))
                             {
                                 moldableCardInfo[1] = 0;
-                                
+
                                 break;
                             }
                             System.Console.WriteLine($"Setting {test[j].InnerHtml} to west on card {i} with {test[1].ChildNodes[0].InnerHtml.Split(" Card")[0]} name");
                             moldableCardInfo[1] = Int32.Parse(test[j].InnerHtml);
-                            Card cardToAdd = new Card(moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3],test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower());
-                            cardToAdd.values = new int?[4] {moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3]};
+                            Card cardToAdd = new Card(moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3], test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower());
+                            cardToAdd.values = new int?[4] { moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3] };
                             cardList.Add(cardToAdd);
                             break;
                     }
