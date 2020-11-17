@@ -64,7 +64,9 @@ namespace FPlus.Program
                             }
                             System.Console.WriteLine($"Setting {test[j].InnerHtml} to west on card {i} with {test[1].ChildNodes[0].InnerHtml.Split(" Card")[0]} name");
                             moldableCardInfo[1] = Int32.Parse(test[j].InnerHtml);
-                            cardList.Add(new Card(moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3],test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower()));
+                            Card cardToAdd = new Card(moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3],test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower());
+                            cardToAdd.values = new int?[4] {moldableCardInfo[0],moldableCardInfo[1],moldableCardInfo[2],moldableCardInfo[3]};
+                            cardList.Add(cardToAdd);
                             break;
                     }
                 }

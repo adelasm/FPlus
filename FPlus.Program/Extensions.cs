@@ -8,73 +8,13 @@ namespace Extensions
 {
     public static class Extensions
     {
-        public static HtmlNodeCollection FindChild(this HtmlNodeCollection parent, string attribute, string value)
-        {
-            for (int i = 0; i < parent.Count; i++)
-            {
-                if (parent[i].Attributes[attribute].Value == value && parent[i].IsHtmlElement())
-                {
-                    System.Console.WriteLine(parent[i].Name);
-                    return parent[i].ChildNodes;
-
-                }
-            }
-            throw new NotImplementedException("pain");
-        }
-
-        public static bool IsNumeric(this string text) => double.TryParse(text, out _);
-
-        public static bool IsHtmlElement(this HtmlNode node)
-        {
-            return node.NodeType == HtmlNodeType.Element;
-        }
         public static bool IsNotPlaceHolder(this ICard card)
         {
             return card.north.IsNotNull() & card.east.IsNotNull() & card.west.IsNotNull() & card.south.IsNotNull();
         }
-        public static int DistanceBetween(this string s, string t)
+        public static bool IsPlaceHolder(this ICard card)
         {
-            int n = s.Length;
-            int m = t.Length;
-            int[,] d = new int[n + 1, m + 1];
-
-            // Step 1
-            if (n == 0)
-            {
-                return m;
-            }
-
-            if (m == 0)
-            {
-                return n;
-            }
-
-            // Step 2
-            for (int i = 0; i <= n; d[i, 0] = i++)
-            {
-            }
-
-            for (int j = 0; j <= m; d[0, j] = j++)
-            {
-            }
-
-            // Step 3
-            for (int i = 1; i <= n; i++)
-            {
-                //Step 4
-                for (int j = 1; j <= m; j++)
-                {
-                    // Step 5
-                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-
-                    // Step 6
-                    d[i, j] = Math.Min(
-                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                        d[i - 1, j - 1] + cost);
-                }
-            }
-            // Step 7
-            return d[n, m];
+            return card.north.IsNull() & card.east.IsNull() & card.west.IsNull() & card.south.IsNull();
         }
 
         public static Position GetPosition(this string input)
@@ -109,6 +49,59 @@ namespace Extensions
         public static bool IsNotNull(this int? i)
         {
             return i != null;
+        }
+
+        public static bool IsMiddle(this Position pos)
+        {
+            return pos == Position.Middle;
+        }
+
+        public static bool IsSide(this Position pos)
+        {
+            return pos == Position.North || pos == Position.South || pos == Position.East || pos == Position.West;
+        }
+
+        public static bool IsCorner(this Position pos)
+        {
+            return pos == Position.NorthWest || pos == Position.NorthEast || pos == Position.SouthEast || pos == Position.SouthWest;
+        }
+
+        public static bool IsPlusValues(this ICard card, ICard cardToCompare, Position position)
+        {
+            int? east = card.east + cardToCompare.east;
+            int? west = card.west + cardToCompare.west;
+            int? north = card.north + cardToCompare.north;
+            int? south = card.south + cardToCompare.south;
+            bool eastIsSouth = east == south;
+            bool westIsSouth = west == south;
+            bool eastIsNorth = east == north;
+            bool westIsNorth = west == north;
+            bool northIsSouth = north == south;
+            bool southIsNorth = south == north;
+            bool eastIsWest = east == west;
+            switch (position)
+            {
+                // Formatted to NWES
+                case Position.NorthWest:
+                    return eastIsSouth;
+                case Position.North:
+                    return eastIsSouth && westIsSouth || eastIsSouth || westIsSouth || eastIsWest;
+                case Position.NorthEast:
+                    return westIsSouth;
+                case Position.East:
+                    return westIsSouth && southIsNorth || westIsSouth || westIsNorth || northIsSouth;
+                case Position.Middle:
+                    return eastIsSouth && southIsNorth && westIsNorth || westIsNorth && westIsSouth || eastIsNorth && eastIsSouth || eastIsNorth || eastIsSouth || westIsNorth || westIsSouth || northIsSouth || eastIsWest;
+                case Position.West:
+                    return westIsSouth && southIsNorth || westIsSouth || westIsNorth || southIsNorth;
+                case Position.SouthWest:
+                    return eastIsNorth;
+                case Position.South:
+                    return eastIsNorth && westIsNorth || eastIsNorth|| westIsNorth || eastIsWest;
+                case Position.SouthEast:
+                    return westIsNorth;
+            }
+            return false;
         }
     }
 }

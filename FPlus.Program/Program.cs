@@ -2,6 +2,7 @@
 using CardCalculator;
 using WriterExtensions;
 using Extensions;
+using System.Collections.Generic;
 
 namespace FPlus.Program
 {
@@ -31,15 +32,20 @@ namespace FPlus.Program
             Board board = new Board();
             board.deck = deck;
             board.library = lib;
+            List<string> suggestions = new List<string>();
             while (true)
             {
                 board.PrintBoard();
+                foreach (var item in suggestions)
+                {
+                    System.Console.WriteLine(item);
+                }
                 System.Console.WriteLine("Play a card.");
                 System.Console.WriteLine("Format (with spaces):");
                 System.Console.WriteLine("CardName Position");
                 string[] input = Console.ReadLine().Split(" ");
                 board.Insert(board.library.ClosestCard(input[0]), input[1].GetPosition());
-                board.CalculatePlus();
+                suggestions = board.CalculatePlus();
             }
         }
     }

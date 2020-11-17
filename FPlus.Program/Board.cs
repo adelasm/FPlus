@@ -92,31 +92,31 @@ namespace FPlus.Program
             return new PlaceHolderCard();
         }
 
-        public int?[] GetNeighborValues(Position position)
+        public ICard GetNeighborValues(Position position)
         {
             switch (position)
             {
                 // Formatted to NWES
                 case Position.NorthWest:
-                    return new int?[4] { null, null, GetCard(Position.North).west, GetCard(Position.West).north, };
+                    return new Card(null, null, GetCard(Position.North).west, GetCard(Position.West).north);
                 case Position.North:
-                    return new int?[4] { null, GetCard(Position.NorthWest).east, GetCard(Position.NorthEast).west, GetCard(Position.Middle).north };
+                    return new Card(null, GetCard(Position.NorthWest).east, GetCard(Position.NorthEast).west, GetCard(Position.Middle).north );
                 case Position.NorthEast:
-                    return new int?[4] { null, GetCard(Position.North).east, null, GetCard(Position.East).north };
+                    return new Card(null, GetCard(Position.North).east, null, GetCard(Position.East).north );
                 case Position.East:
-                    return new int?[4] { GetCard(Position.NorthEast).south, GetCard(Position.Middle).east, null, GetCard(Position.SouthEast).north };
+                    return new Card(GetCard(Position.NorthEast).south, GetCard(Position.Middle).east, null, GetCard(Position.SouthEast).north );
                 case Position.Middle:
-                    return new int?[4] { GetCard(Position.North).south, GetCard(Position.West).east, GetCard(Position.East).west, GetCard(Position.South).north };
+                    return new Card(GetCard(Position.North).south, GetCard(Position.West).east, GetCard(Position.East).west, GetCard(Position.South).north );
                 case Position.West:
-                    return new int?[4] { GetCard(Position.NorthWest).south, null, GetCard(Position.Middle).west, GetCard(Position.SouthWest).north };
+                    return new Card(GetCard(Position.NorthWest).south, null, GetCard(Position.Middle).west, GetCard(Position.SouthWest).north );
                 case Position.SouthWest:
-                    return new int?[4] { GetCard(Position.West).south, null, GetCard(Position.South).west, null };
+                    return new Card(GetCard(Position.West).south, null, GetCard(Position.South).west, null );
                 case Position.South:
-                    return new int?[4] { GetCard(Position.Middle).south, GetCard(Position.SouthWest).east, GetCard(Position.SouthEast).west, null };
+                    return new Card(GetCard(Position.Middle).south, GetCard(Position.SouthWest).east, GetCard(Position.SouthEast).west, null );
                 case Position.SouthEast:
-                    return new int?[4] { GetCard(Position.East).south, GetCard(Position.South).east, null, null };
+                    return new Card(GetCard(Position.East).south, GetCard(Position.South).east, null, null );
             }
-            return new int?[] { null };
+            return new PlaceHolderCard();
         }
 
         public ISquare[][] BoardState()

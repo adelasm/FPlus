@@ -45,9 +45,9 @@
             "east": 3,
             "south": 3,
             "values": [
+                3,
+                3,
                 4,
-                3,
-                3,
                 3
             ],
             "name": "sabotender"
