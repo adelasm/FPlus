@@ -66,42 +66,48 @@ namespace Extensions
             return pos == Position.NorthWest || pos == Position.NorthEast || pos == Position.SouthEast || pos == Position.SouthWest;
         }
 
-        public static bool IsPlusValues(this ICard card, ICard cardToCompare, Position position)
+        public static bool CompareValues(this int?[] neighborValues, int?[] libCardValues, int value1, int value2)
         {
-            int? east = card.east + cardToCompare.east;
-            int? west = card.west + cardToCompare.west;
-            int? north = card.north + cardToCompare.north;
-            int? south = card.south + cardToCompare.south;
-            bool eastIsSouth = east == south;
-            bool westIsSouth = west == south;
-            bool eastIsNorth = east == north;
-            bool westIsNorth = west == north;
-            bool northIsSouth = north == south;
-            bool southIsNorth = south == north;
-            bool eastIsWest = east == west;
-            switch (position)
+            return neighborValues[value1] - libCardValues[value1] == libCardValues[value2] - neighborValues[value1];
+        }
+
+
+        public static bool CompareCardDirections(this ICard neighborValues, ICard libCard, int[] ids)
+        {
+            for (int i = 0; i < ids.Length; i++)
             {
-                // Formatted to NWES
-                case Position.NorthWest:
-                    return eastIsSouth;
-                case Position.North:
-                    return eastIsSouth && westIsSouth || eastIsSouth || westIsSouth || eastIsWest;
-                case Position.NorthEast:
-                    return westIsSouth;
-                case Position.East:
-                    return westIsSouth && southIsNorth || westIsSouth || westIsNorth || northIsSouth;
-                case Position.Middle:
-                    return eastIsSouth && southIsNorth && westIsNorth || westIsNorth && westIsSouth || eastIsNorth && eastIsSouth || eastIsNorth || eastIsSouth || westIsNorth || westIsSouth || northIsSouth || eastIsWest;
-                case Position.West:
-                    return westIsSouth && southIsNorth || westIsSouth || westIsNorth || southIsNorth;
-                case Position.SouthWest:
-                    return eastIsNorth;
-                case Position.South:
-                    return eastIsNorth && westIsNorth || eastIsNorth|| westIsNorth || eastIsWest;
-                case Position.SouthEast:
-                    return westIsNorth;
+                for (int j = 0; j < libCard.values.Length; j++)
+                {
+                    if (neighborValues.values[ids[i]].IsNull())
+                    {
+                        continue;
+                    }
+                    return (neighborValues.values[ids[i]] - libCard.values[j] == libCard.values[j] - neighborValues.values[i]);
+                }
             }
             return false;
         }
+
+        public static void CheckAndAssignNull(this ICard cardToReturn, ICard neighborValues)
+        {
+            if (neighborValues.values[0].IsNull())
+            {
+                cardToReturn.north = null;
+            }
+            if (neighborValues.values[1].IsNull())
+            {
+                cardToReturn.west = null;
+            }
+            if (neighborValues.values[2].IsNull())
+            {
+                cardToReturn.east = null;
+            }
+            if (neighborValues.values[3].IsNull())
+            {
+                cardToReturn.south = null;
+            }
+        }
+
+
     }
 }

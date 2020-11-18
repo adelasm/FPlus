@@ -85,7 +85,7 @@ namespace FPlus.Program
 
         public override string ToString()
         {
-            return $"{name} ({north},{west},{east},{south})";
+            return $"{name} ({values[0]},{values[1]},{values[2]},{values[3]})";
         }
     }
 }

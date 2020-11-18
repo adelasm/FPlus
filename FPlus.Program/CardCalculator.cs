@@ -26,7 +26,7 @@ namespace CardCalculator
                         continue;
                     }
                     ICard neighborCard = board.GetNeighborValues(pos);
-                    ICard card = neighborCard.MatchingFromLibrary(board.deck);
+                    ICard card = neighborCard.MatchingFromLibrary(board.deck, pos);
                     board.Insert(card, pos);
                     if (card.name != null)
                     {
@@ -51,79 +51,83 @@ namespace CardCalculator
 
         public static ICard FindEquals(this ICard card)
         {
-            int?[] values = new int?[4] { card.north, card.west, card.east, card.south };
-            int? max = values.Max() + 1;
-            card.north = max - card.north;
-            card.west = max - card.west;
-            card.east = max - card.east;
-            card.south = max - card.south;
+            ICard plusables = new Card(card.north, card.west, card.east, card.south);
+            plusables.values = card.values;
+            int? max = plusables.values.Max() + 1;
+            plusables.north = max - card.north;
+            plusables.west = max - card.west;
+            plusables.east = max - card.east;
+            plusables.south = max - card.south;
 
-            return card;
+            return plusables;
         }
 
-        public static ICard MatchingFromLibrary(this ICard card, ILibrary library)
+        public static ICard MatchingFromLibrary(this ICard neighborValues, ILibrary library, Position position)
         {
-            card = card.FindPlusables();
-            ICard match = new Card();
+            ICard cardToReturn = new Card();
             foreach (ICard libCard in library.cards)
             {
-                match = new Card(libCard.north.Value, libCard.west.Value, libCard.east.Value, libCard.south.Value, libCard.name);
-                match.values = libCard.values;
-                if (card.north.IsNull())
+                switch (position)
                 {
-                    match.north = null;
-                    match.values[0] = null;
-                }
-                if (card.east.IsNull())
-                {
-                    match.east = null;
-                    match.values[2] = null;
-                }
-                if (card.west.IsNull())
-                {
-                    match.west = null;
-                    match.values[1] = null;
-                }
-                if (card.south.IsNull())
-                {
-                    match.south = null;
-                    match.values[3] = null;
-                }
-                match = match.FindPlusables();
-
-                if (match.IsPlaceHolder())
-                {
-                    match = new Card();
-                    continue;
-                }
-                if (match.north == card.north && match.west == card.west && match.east == card.east && match.south == card.south)
-                {
-                    match = new Card(libCard.north.Value, libCard.west.Value, libCard.east.Value, libCard.south.Value, libCard.name);
-                    match.values = libCard.values;
-                    if (card.north.IsNull())
-                    {
-                        match.north = null;
-                    }
-                    if (card.east.IsNull())
-                    {
-                        match.east = null;
-                    }
-                    if (card.west.IsNull())
-                    {
-                        match.west = null;
-                    }
-                    if (card.south.IsNull())
-                    {
-                        match.south = null;
-                    }
-                    break;
+                    // Formatted to NWES
+                    case Position.NorthWest:
+                        if (neighborValues.CompareCardDirections(libCard, new int[]{2, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.North:
+                        if (neighborValues.CompareCardDirections(libCard, new int[]{1, 2, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.NorthEast:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{1, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.East:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 1, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.Middle:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 1, 2, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.West:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 2, 3}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.SouthWest:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 2}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.South:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 1, 2}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
+                    case Position.SouthEast:
+                    if (neighborValues.CompareCardDirections(libCard, new int[]{0, 1}))
+                        {
+                            cardToReturn = new Card(libCard.north,libCard.west,libCard.east,libCard.south,libCard.name);
+                        }
+                        break;
                 }
             }
-            if (match.IsNotPlaceHolder())
-            {
-                return new PlaceHolderCard();
-            }
-            return match;
+            cardToReturn.CheckAndAssignNull(neighborValues);
+            return cardToReturn;
         }
     }
 }

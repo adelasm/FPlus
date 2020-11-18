@@ -12,11 +12,6 @@ namespace FPlus.Program
         {
             Controller controller = new Controller();
             controller.initDeckLoop();
-            // string deckName = Console.ReadLine();
-            // if (deckName != "")
-            // {
-            //     deck.fileName = deckName;
-            // }
             System.Console.WriteLine("The deck:");
             foreach (var card in controller.deck.cards)
             {

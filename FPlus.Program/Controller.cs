@@ -27,6 +27,10 @@ namespace FPlus.Program
             initDeck("Deck");
             System.Console.WriteLine($"Enter deck file name (default is {deck.fileName} if empty)");
             initDeck(Console.ReadLine());
+            foreach (Card card in deck.cards)
+            {
+                System.Console.WriteLine(card.ToString());
+            }
             while (true)
             {//TODO: Make collection of commands
             System.Console.WriteLine("Enter command:");
