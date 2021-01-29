@@ -26,47 +26,63 @@ namespace FPlus.Program
                 var test = htmlBody[i].ChildNodes;
                 for (int j = 0; j < test.Count; j++)
                 {
+                    string value = test[j].InnerHtml.Trim();
                     switch (j)
                     {
                         case 9:
-                            if (!int.TryParse(test[j].InnerHtml, out _))
+                            if (int.TryParse(value, out _) || value.Trim().Equals("A"))
                             {
-                                moldableCardInfo[0] = 0;
+                                System.Console.WriteLine($"Setting {value} to north on card {i}");
+                                if (value == "A")
+                                {
+                                    value = "10";
+                                }
+                                moldableCardInfo[0] = Int32.Parse(value);
                                 break;
                             }
-                            System.Console.WriteLine($"Setting {test[j].InnerHtml} to north on card {i}");
-                            moldableCardInfo[0] = Int32.Parse(test[j].InnerHtml);
+                            moldableCardInfo[0] = 0;
                             break;
                         case 11:
-                            if (!int.TryParse(test[j].InnerHtml, out _))
+                            if (int.TryParse(value, out _) || value.Trim().Equals("A"))
                             {
-                                moldableCardInfo[2] = 0;
+                                System.Console.WriteLine($"Setting {value} to east on card {i}");
+                                if (value == "A")
+                                {
+                                    value = "10";
+                                }
+                                moldableCardInfo[2] = Int32.Parse(value);
                                 break;
                             }
-                            System.Console.WriteLine($"Setting {test[j].InnerHtml} to east on card {i}");
-                            moldableCardInfo[2] = Int32.Parse(test[j].InnerHtml);
+                            moldableCardInfo[2] = 0;
                             break;
                         case 13:
-                            if (!int.TryParse(test[j].InnerHtml, out _))
+                            if (int.TryParse(value, out _) || value.Trim().Equals("A"))
                             {
-                                moldableCardInfo[3] = 0;
+                                System.Console.WriteLine($"Setting {value} to south on card {i}");
+                                if (value == "A")
+                                {
+                                    value = "10";
+                                }
+                                moldableCardInfo[3] = Int32.Parse(value);
                                 break;
                             }
-                            System.Console.WriteLine($"Setting {test[j].InnerHtml} to south on card {i}");
-                            moldableCardInfo[3] = Int32.Parse(test[j].InnerHtml);
+                            moldableCardInfo[3] = 0;
                             break;
                         case 15:
-                            if (!int.TryParse(test[j].InnerHtml, out _))
+                            if (int.TryParse(value, out _) || value.Equals("A"))
                             {
-                                moldableCardInfo[1] = 0;
-
+                                System.Console.WriteLine($"Setting {value} to west on card {i} with {test[1].ChildNodes[0].InnerHtml.Split(" Card")[0]} name");
+                                if (value == "A")
+                                {
+                                    value = "10";
+                                }
+                                moldableCardInfo[1] = Int32.Parse(value);
+                                Card cardToAdd = new Card(moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3], test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower());
+                                cardToAdd.values = new int?[4] { moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3] };
+                                cardList.Add(cardToAdd);
                                 break;
                             }
-                            System.Console.WriteLine($"Setting {test[j].InnerHtml} to west on card {i} with {test[1].ChildNodes[0].InnerHtml.Split(" Card")[0]} name");
-                            moldableCardInfo[1] = Int32.Parse(test[j].InnerHtml);
-                            Card cardToAdd = new Card(moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3], test[1].ChildNodes[0].InnerHtml.Split(" Card")[0].ToLower());
-                            cardToAdd.values = new int?[4] { moldableCardInfo[0], moldableCardInfo[1], moldableCardInfo[2], moldableCardInfo[3] };
-                            cardList.Add(cardToAdd);
+                            moldableCardInfo[1] = 0;
                             break;
                     }
                 }
